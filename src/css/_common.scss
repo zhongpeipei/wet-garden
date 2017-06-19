@@ -1,0 +1,14 @@
+@function remf($px){
+  @return ($px/40) + rem;
+}
+
+@mixin middle {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+}
+
+@mixin middleCenter {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+}
