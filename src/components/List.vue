@@ -35,124 +35,32 @@
 import uSearch from '@/components/uSearch';
 import uSort from '@/components/uSort';
 import uNav from '@/components/uNav';
-import service from '@/service';
+// import service from '@/service';
+import vue from 'vue';
 
 export default {
   name: 'List',
-  data () {
+  data: function () {
     return {
       styles: {
         width: '100%'
       },
-      datas: [
-        {
-          id: 1,
-          img: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大,2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 2,
-          img: 'http://img4.imgtn.bdimg.com/it/u=3504717282,1849537370&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。',
-          time: '2017-06-12',
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 3,
-          img: 'http://img3.imgtn.bdimg.com/it/u=2707275081,243921012&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 4,
-          img: 'http://img2.imgtn.bdimg.com/it/u=610865047,2963548789&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 5,
-          img: 'http://img1.imgtn.bdimg.com/it/u=2470159435,85544574&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 6,
-          img: 'http://img4.imgtn.bdimg.com/it/u=1211024949,2328269137&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 7,
-          img: 'http://img4.imgtn.bdimg.com/it/u=3504717282,1849537370&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 8,
-          img: 'http://img3.imgtn.bdimg.com/it/u=2707275081,243921012&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 9,
-          img: 'http://img2.imgtn.bdimg.com/it/u=610865047,2963548789&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        },
-        {
-          id: 10,
-          img: 'http://img3.imgtn.bdimg.com/it/u=879104673,4142663248&fm=26&gp=0.jpg',
-          name: '春娇救志明',
-          summary: '2009年，春娇志明后巷邂逅，演绎烟火世界中的极致浪漫。 2017年，饮食男女分分合合，志明仍未长大',
-          time: '2017-06-12',
-          views: 68090,
-          score: '8.2',
-          area: '中国大陆'
-        }
-      ]
+      datas: []
     };
   },
   mounted () {
-    this.lunbo();
+
   },
-  methods:{
-    getList: function(){
-      service.get('')
-    }
+  created: function () {
+    // service.get(this, '../localdata/localdata.json').then(function (res) {
+    //    this.datas = res;
+    // })
+
+    vue.$http.get('../localdata/localdata.json').then((res) => {
+      if(res){
+        this.datas = res.datas;
+      }
+    })
   },
   components: {
     uSearch,
