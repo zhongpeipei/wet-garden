@@ -4,18 +4,18 @@
 
     <div class="content">
       <div class="imgBox">
-        <img :src="details.img"/>
+        <img :src="details.imgs[0].url"/>
       </div>
       <div class="info">
-        <p>导演：{{details.director}}</p>
-        <p>编剧：{{details.screenwriter}}</p>
-        <p>主演：{{details.actor}}</p>
-        <p>类型：{{details.type}}</p>
-        <p>地区：{{details.area}}</p>
-        <p>语言：{{details.language}}</p>
-        <p>片长：{{details.duration}}</p>
-        <p>评分：{{details.score}}分</p>
-        <p>上映日期：{{details.time}}</p>
+        <p>导演：{{details.about.director}}</p>
+        <p>编剧：{{details.about.screenwriter}}</p>
+        <p>主演：{{details.about.actor}}</p>
+        <p>类型：<span class="type" v-for="t in details.about.categorys">{{t}}</span></p>
+        <p>地区：{{details.about.area}}</p>
+        <p>语言：{{details.about.language}}</p>
+        <p>片长：{{details.about.duration}}</p>
+        <p>评分：{{details.score.average}}分</p>
+        <p>上映日期：{{details.about.time}}</p>
       </div>
     </div>
 
@@ -23,7 +23,28 @@
       <p class="title">{{details.name}}的剧情简介</p>
       <p class="summary">{{details.summary}}</p>
       <p class="title">{{details.name}}的下载链接</p>
-      <p class="downLink">{{details.downLink}}</p>
+      <div class="downLink">
+        <ul class="baidu">
+          <li v-for="(b, $index) in downLoads.baidu" :key="$index">
+            百度云盘 <span v-if="downLoads.baidu.length > 1">{{$index + 1}}</span>：<a :href="b.link">{{b.link}}</a> 密码：{{b.password}}
+          </li>
+        </ul>
+        <ul class="thunder">
+          <li v-for="(x, $index) in downLoads.thunder" :key="$index">
+            迅雷下载 <span v-if="downLoads.thunder.length > 1">{{$index + 1}}</span>：<a :href="x">点击此处，复制下载地址，粘贴到迅雷中下载</a>
+          </li>
+        </ul>
+        <ul class="magnet">
+          <li v-for="(x, $index) in downLoads.magnet" :key="$index">
+            磁力链接 <span v-if="downLoads.magnet.length > 1">{{$index + 1}}</span>：<a :href="x">点击此处，复制下载地址，粘贴到迅雷中下载</a>
+          </li>
+        </ul>
+        <ul class="http">
+          <li v-for="(x, $index) in downLoads.http" :key="$index">
+            种子下载 <span v-if="downLoads.http.length > 1">{{$index + 1}}</span>：<a :href="x">点击此处下载</a>
+          </li>
+        </ul>
+      </div>
       <p class="title">热评</p>
     </div>
 
@@ -46,62 +67,137 @@
 
 <script>
 import uNav from '@/components/uNav';
+import urls from '../../src/url';
 
 export default {
   name: 'detail',
   data () {
     return {
-      datas: [],
-      details: {},
-      comments:[]
-      // details: {
-      //   id: 1,
-      //   img: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-      //   name: '失恋399年',
-      //   summary: '电影《失恋399年》是一部爱情喜剧穿越题材的电影，影片讲述了不务正业的李肖翰在大学毕业前夕收到了来自女友张思雅的分手通知。失恋中的李肖翰却因一股神奇的力量与女友一同穿越到了明代和清代。回到前两世的张思雅将李肖翰忘得一干二净，但李肖翰却拥有今世的记忆，一心求复合的他在女友张思雅的两世里想法设法去弥补对女友的愧疚，争取挽回爱情，同时也在寻找回到今生的办法。',
-      //   time: '2017-06-09',
-      //   score: '8.2',
-      //   area: '中国大陆',
-      //   director: '吴吞',
-      //   screenwriter: '孙冬冬',
-      //   actor: '郑文蓉',
-      //   type: ' 剧情 / 喜剧 / 爱情剧情 / 喜剧 / 爱情',
-      //   language: '中文普通话',
-      //   duration: '93分钟',
-      //   downLink: ''
-      // },
-      // comments: [
-      //   {
-      //     id: 1,
-      //     pic: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-      //     name: '棉花糖Three',
-      //     time: '2017-06-16',
-      //     comment: '这造型太可怕了，辣眼睛，不能直视'
-      //   },
-      //   {
-      //     id: 2,
-      //     pic: '',
-      //     name: '棉花糖Four',
-      //     time: '2017-06-17',
-      //     comment: '辣眼睛，不能直视'
-      //   },
-      //   {
-      //     id: 3,
-      //     pic: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-      //     name: '棉花糖',
-      //     time: '2017-06-17',
-      //     comment: '这造型太可怕了……'
-      //   }
-      // ]
-    };
+      // details: {},
+      // downLoads: {},
+      // comments:[]
+      details: {
+        "id": 23,
+        "area": "美国",
+        "imgs": [
+            {
+                "url": "https://img1.doubanio.com/view/movie_poster_cover/lpst/public/p2404017038.jpg",
+                "type": 1
+            },
+            {
+                "url": "https://img1.doubanio.com/view/movie_poster_cover/lpst/public/p2404017038.jpg",
+                "type": 1
+            }
+        ],
+        "name": "最后的话",
+        "alias": "The Last Word",
+        "summary": "It centers on a retired businesswoman (MacLaine) who tries to control everything around her, including her own obituary (which she sets out to write herself). Seyfried plays a young journalist who tries to find out the out the truth about the woman, resulting in a life-altering friendship.",
+        "score": {
+            "max": 10,
+            "average": 7,
+            "stars": "35",
+            "min": 0
+        },
+        "release_time": "2017-06-20",
+        "about": {
+            "categorys": ["喜剧", "动作", "剧情", "喜剧", "动作", "剧情"],
+            "area": "美国",
+            "language": "英语",
+            "director": "马克·佩灵顿",
+            "screenwriter": "Stuart Ross Fink",
+            "actor": "阿曼达·塞弗里德",
+            "time": "2017-03-03(美国)",
+            "duration": "108分钟"
+        },
+        "online": false
+      },
+      comments:  [
+        {
+            "comment": "跟我的小美人儿一起看的 @stella_zhou",
+            "name": "JoshuaWilliams",
+            "time": "2017-03-25",
+            "pic": ""
+        },
+        {
+            "comment": "祖孙三代天伦之乐版本的当下末路狂花。充满政治不正确与绝对正确。推荐给当下的女性盆友们。",
+            "name": "泥巴",
+            "time": "2017-06-12",
+            "pic": ""
+        },
+        {
+            "comment": "",
+            "name": "夜舞",
+            "time": "2017-06-21",
+            "pic": ""
+        },
+        {
+            "comment": "类似《实习生》与《穿普拉达的女王》老少组合的关系，喜剧冲突很多，面对的现实问题能帮你想明白很多复杂的事情，从而指导你怎么活。只是这种形式难免陷入俗套",
+            "name": "金利是个省油灯",
+            "time": "2017-06-21",
+            "pic": ""
+        },
+        {
+            "comment": "还不错很励志的电影。关掉播放器，还是回到自己平庸没有灵魂的工作和生活，放飞自我和追求梦想留到以后吧。",
+            "name": "zoe",
+            "time": "2017-06-22",
+            "pic": ""
+        },
+        {
+            "comment": "阿曼达怎么还是不温不火 从外形到演技都比石头姐强",
+            "name": "night in heart",
+            "time": "2017-06-02",
+            "pic": ""
+        },
+        {
+            "comment": "老与少的碰撞，再活一次的激情。绝症又落于俗套了。我爱阿曼达。",
+            "name": "流连书影",
+            "time": "2017-05-21",
+            "pic": ""
+        },
+        {
+            "comment": "阿曼达外形和演技都不错，还行能看。",
+            "name": "轻舞飞扬",
+            "time": "2017-06-10",
+            "pic": ""
+        }
+      ],
+      downLoads: {
+        "magnet": ["magnet:?xt=urn:btih:96910bf72e4f8de797bd97941b1c4d182805824b", "magnet:?xt=urn:btih:96910bf72e4f8de797bd97941b1c4d182805824b"],
+        "thunder": ["thunder://QUFodHRwOi8vZGwxMjIuODBzLmltOjkyMC8xNzA2L+atjOWjsOS4jee7nS/mrYzlo7DkuI3nu50ubXA0Wlo="],
+        "baidu": [
+          {
+            "link": "http://pan.baidu.com/s/1kUCWhaZ",
+            "password": "zg4k"
+          },
+          {
+            "link": "http://pan.baidu.com/s/1kUCWhaZ",
+            "password": "zg4k"
+          }
+        ],
+        "http": ["http://xz.66vod.net:889/2017/%E6%AD%8C%E5%A3%B0%E4%B8%8D%E7%BB%9D.720p.BD%E4%B8%AD%E8%8B%B1%E5%8F%8C%E5%AD%97[66%E5%BD%B1%E8%A7%86www.66ys.tv].mp4.torrent"]
+      }
+    }
   },
   created: function () {
-    this.$http.get('/rest/v1/detail/39').then((res) => {
-      if(res && res.body.code===0){
-console.log(res);
-        this.datas = res.body.data.list;
-      }
-    })
+    // this.$http.get(urls.domain + urls.detail + '/' + this.$route.params.id).then((res) => {
+    //   if(res && res.body.code===0){
+    //     this.details = res.body.data;
+    //   }
+    // })
+
+    // this.$http.get(urls.domain + urls.downLoad + '/' + this.$route.params.id).then((res) => {
+    //   if(res && res.body.code===0){
+    //     this.downLoads = res.body.data;
+    //   }
+    // })
+
+    // this.$http.get(urls.domain + urls.comment + '/' + this.$route.params.id).then((res) => {
+    //   if(res && res.body.code===0){
+    //     this.comments = res.body.data;
+    //   }
+    // })
+
+    // console.log('id:' + this.$route.params.id);
   },
   components: {
     uNav
@@ -157,6 +253,10 @@ console.log(res);
           text-overflow:ellipsis;
           overflow:hidden;
         }
+
+        .type{
+          margin-right: 0.2rem;
+        }
       }
     }
 
@@ -183,6 +283,16 @@ console.log(res);
 
       .downLink{
         padding: 0.4rem 0.4rem 1rem 0.4rem;
+
+        li{
+          font-size: 0.4rem;
+          margin-bottom: 0.15rem;
+        }
+
+        a{
+          text-decoration: underline;
+          color: #00C8BE;
+        }
       }
     }
 

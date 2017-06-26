@@ -1,7 +1,7 @@
 <template>
   <div class="listBox">
     <div class="header">
-      <u-search :seach-style="styles"></u-search>
+      <u-search :seach-style="styles" @search="search(searchValue)"></u-search>
       <u-sort></u-sort>
     </div>
 
@@ -35,6 +35,7 @@
 import uSearch from '@/components/uSearch';
 import uSort from '@/components/uSort';
 import uNav from '@/components/uNav';
+import urls from '../../src/url';
 
 export default {
   name: 'List',
@@ -46,8 +47,13 @@ export default {
       datas: []
     };
   },
+  methods: {
+    search: function (searchValue) {
+      console.log(searchValue);
+    }
+  },
   created: function () {
-    this.$http.get('/rest/v1/list').then((res) => {
+    this.$http.get(urls.domain + urls.list).then((res) => {
       if(res && res.body.code===0){
         this.datas = res.body.data.list;
       }

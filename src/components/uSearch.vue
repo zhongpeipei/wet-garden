@@ -1,7 +1,7 @@
 <template>
   <div class="search" :style="seachStyle">
     <input placeholder="请输入电影名称或关键字" type="text" v-model="searchValue"/>
-    <router-link to="/detail">
+    <router-link to="/list">
       <i class="button" @click="search()"></i>
     </router-link>
   </div>
