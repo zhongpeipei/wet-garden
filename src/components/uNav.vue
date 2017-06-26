@@ -58,7 +58,7 @@ export default {
   li {
     height: remf(85);
     flex-grow: 1;
-    padding-top: remf(10);
+    padding-top: 0.15rem;
     box-sizing: border-box;
     text-align: center;
 
@@ -72,7 +72,7 @@ export default {
 
     p {
       font-size: remf(20);
-      vertical-align: remf(8);
+      margin-top: -0.3rem;
     }
 
     .active {

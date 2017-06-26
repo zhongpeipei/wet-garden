@@ -28,7 +28,7 @@ export default {
 @import '../css/common';
 
   .search{
-    padding-top: remf(5);
+    margin-top: -0.15rem;
     position: relative;
 
     input{
@@ -45,7 +45,7 @@ export default {
 
     .button{
       position: absolute;
-      top: remf(12);
+      top: remf(16);
       right: remf(5);
       content: '';
       width: remf(28);

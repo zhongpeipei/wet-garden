@@ -51,46 +51,57 @@ export default {
   name: 'detail',
   data () {
     return {
-      details: {
-        id: 1,
-        img: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-        name: '失恋399年',
-        summary: '电影《失恋399年》是一部爱情喜剧穿越题材的电影，影片讲述了不务正业的李肖翰在大学毕业前夕收到了来自女友张思雅的分手通知。失恋中的李肖翰却因一股神奇的力量与女友一同穿越到了明代和清代。回到前两世的张思雅将李肖翰忘得一干二净，但李肖翰却拥有今世的记忆，一心求复合的他在女友张思雅的两世里想法设法去弥补对女友的愧疚，争取挽回爱情，同时也在寻找回到今生的办法。',
-        time: '2017-06-09',
-        score: '8.2',
-        area: '中国大陆',
-        director: '吴吞',
-        screenwriter: '孙冬冬',
-        actor: '郑文蓉',
-        type: ' 剧情 / 喜剧 / 爱情剧情 / 喜剧 / 爱情',
-        language: '中文普通话',
-        duration: '93分钟',
-        downLink: ''
-      },
-      comments: [
-        {
-          id: 1,
-          pic: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-          name: '棉花糖Three',
-          time: '2017-06-16',
-          comment: '这造型太可怕了，辣眼睛，不能直视'
-        },
-        {
-          id: 2,
-          pic: '',
-          name: '棉花糖Four',
-          time: '2017-06-17',
-          comment: '辣眼睛，不能直视'
-        },
-        {
-          id: 3,
-          pic: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
-          name: '棉花糖',
-          time: '2017-06-17',
-          comment: '这造型太可怕了……'
-        }
-      ]
+      datas: [],
+      details: {},
+      comments:[]
+      // details: {
+      //   id: 1,
+      //   img: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
+      //   name: '失恋399年',
+      //   summary: '电影《失恋399年》是一部爱情喜剧穿越题材的电影，影片讲述了不务正业的李肖翰在大学毕业前夕收到了来自女友张思雅的分手通知。失恋中的李肖翰却因一股神奇的力量与女友一同穿越到了明代和清代。回到前两世的张思雅将李肖翰忘得一干二净，但李肖翰却拥有今世的记忆，一心求复合的他在女友张思雅的两世里想法设法去弥补对女友的愧疚，争取挽回爱情，同时也在寻找回到今生的办法。',
+      //   time: '2017-06-09',
+      //   score: '8.2',
+      //   area: '中国大陆',
+      //   director: '吴吞',
+      //   screenwriter: '孙冬冬',
+      //   actor: '郑文蓉',
+      //   type: ' 剧情 / 喜剧 / 爱情剧情 / 喜剧 / 爱情',
+      //   language: '中文普通话',
+      //   duration: '93分钟',
+      //   downLink: ''
+      // },
+      // comments: [
+      //   {
+      //     id: 1,
+      //     pic: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
+      //     name: '棉花糖Three',
+      //     time: '2017-06-16',
+      //     comment: '这造型太可怕了，辣眼睛，不能直视'
+      //   },
+      //   {
+      //     id: 2,
+      //     pic: '',
+      //     name: '棉花糖Four',
+      //     time: '2017-06-17',
+      //     comment: '辣眼睛，不能直视'
+      //   },
+      //   {
+      //     id: 3,
+      //     pic: 'http://img0.imgtn.bdimg.com/it/u=3421089525,1529372161&fm=26&gp=0.jpg',
+      //     name: '棉花糖',
+      //     time: '2017-06-17',
+      //     comment: '这造型太可怕了……'
+      //   }
+      // ]
     };
+  },
+  created: function () {
+    this.$http.get('/rest/v1/detail/39').then((res) => {
+      if(res && res.body.code===0){
+console.log(res);
+        this.datas = res.body.data.list;
+      }
+    })
   },
   components: {
     uNav
@@ -152,6 +163,7 @@ export default {
     .content-block{
       padding: 0 0.35rem;
       margin-top: 0.8rem;
+      font-size: 0.6rem;
 
       .title{
         height: 1.4rem;
@@ -176,6 +188,7 @@ export default {
 
     .hot-comment{
       padding: 0 0.35rem 3rem 0.35rem;
+      font-size: 0.6rem;
 
       li{
         border-bottom: 1px dashed #00C8BE;

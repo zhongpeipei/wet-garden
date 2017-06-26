@@ -35,8 +35,6 @@
 import uSearch from '@/components/uSearch';
 import uSort from '@/components/uSort';
 import uNav from '@/components/uNav';
-// import service from '@/service';
-import vue from 'vue';
 
 export default {
   name: 'List',
@@ -48,17 +46,10 @@ export default {
       datas: []
     };
   },
-  mounted () {
-
-  },
   created: function () {
-    // service.get(this, '../localdata/localdata.json').then(function (res) {
-    //    this.datas = res;
-    // })
-
-    vue.$http.get('../localdata/localdata.json').then((res) => {
-      if(res){
-        this.datas = res.datas;
+    this.$http.get('/rest/v1/list').then((res) => {
+      if(res && res.body.code===0){
+        this.datas = res.body.data.list;
       }
     })
   },
@@ -136,22 +127,23 @@ export default {
           .summary{
             color: #666;
             font-size: remf(22);
-            height: 2.17rem;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            margin: 0.2rem 0 0.3rem 0;
+            margin: 0.3rem 0 0.45rem 0;
           }
 
           .info{
             font-size: remf(18);
             border-bottom: 1px solid #eee;
             padding-bottom: 0.3rem;
+            overflow: hidden;
 
             span{
-              margin-right: 0.8rem;
+              float: left;
+              margin-right: 0.4rem;
             }
 
             i{
@@ -160,17 +152,22 @@ export default {
 
             .time{
               i{
-                background-position: -4rem 0.15rem;
+                background-position: -3.9rem 0.15rem;
               }
             }
             .score{
               i{
-                background-position: -2.4rem 0.15rem;
+                background-position: -2.3rem 0.15rem;
               }
             }
             .area{
+                width: 3.2rem;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+
               i{
-                background-position: -4.8rem 0.15rem;
+                background-position: -4.7rem 0.15rem;
               }
             }
           }
