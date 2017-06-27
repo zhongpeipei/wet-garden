@@ -12,3 +12,37 @@
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
 }
+
+@mixin rotate ($deg) {
+  -webkit-transform:rotate($deg + deg);
+}
+
+.close{
+  position: absolute;
+  width: 0.6rem;
+  height: 0.6rem;
+
+  &::before{
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 0.05rem;
+    background: #7D7D7E;
+    position: absolute;
+
+    @include middleCenter;
+  }
+
+  &::after{
+    content: "";
+    display: block;
+    width: 0.05rem;
+    height: 0.5rem;
+    background: #7D7D7E;
+    position: absolute;
+
+    @include middleCenter;
+  }
+
+  @include rotate(45);
+}

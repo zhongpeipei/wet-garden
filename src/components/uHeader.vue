@@ -4,7 +4,7 @@
       <h1>雨后花园</h1>
     </div>
 
-    <u-search :seach-style="styles"></u-search>
+    <u-search :seach-style="styles"  @searchButton="searchButton"></u-search>
   </div>
 </template>
 
@@ -20,6 +20,11 @@ export default {
         float: 'right'
       }
     };
+  },
+  methods: {
+    searchButton: function (data) {
+      this.$emit('search', data);
+    }
   },
   components: {
     uSearch

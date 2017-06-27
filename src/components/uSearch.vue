@@ -1,8 +1,9 @@
 <template>
   <div class="search" :style="seachStyle">
     <input placeholder="请输入电影名称或关键字" type="text" v-model="searchValue"/>
-    <router-link to="/list">
-      <i class="button" @click="search()"></i>
+    <i class="close" @click="clear"></i>
+    <router-link :to="'/list/' + searchValue">
+      <i class="button" @click="searchButton"></i>
     </router-link>
   </div>
 </template>
@@ -17,8 +18,11 @@ export default {
     };
   },
   methods: {
-    search: function () {
-      this.searchValue;
+    clear: function (){
+      this.searchValue = '';
+    },
+    searchButton: function () {
+      this.$emit('searchButton', this.searchValue);
     }
   }
 };
@@ -41,6 +45,11 @@ export default {
       font-size: remf(14);
       color: #999;
       box-sizing: border-box;
+    }
+
+    .close{
+      top: remf(16);
+      right: remf(38);
     }
 
     .button{

@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <!--header-->
-    <u-header></u-header>
+    <div class="header">
+      <div class="title">
+        <h1>雨后花园</h1>
+      </div>
+
+      <u-search :seach-style="styles"  @searchButton="search"></u-search>
+    </div>
 
     <!--banner-->
     <div class="swiper-container">
@@ -43,7 +49,7 @@
 
 <script>
 import Swiper from '../../static/swiper.min.js';
-import uHeader from '@/components/uHeader';
+import uSearch from '@/components/uSearch';
 import uNav from '@/components/uNav';
 import urls from '../../src/url';
 
@@ -51,6 +57,10 @@ export default {
   name: 'home',
   data () {
     return {
+       styles: {
+        width: '8.5rem',
+        float: 'right'
+      },
       // banners: [],
       // hotLists: []
       banners: [
@@ -229,6 +239,11 @@ export default {
         loop: true,
         autoplay: 2000
       });
+    },
+
+    search: function (data) {
+      this.$emit('search', data);
+      // console.log('value:' + data);
     }
   },
   created: function () {
@@ -240,7 +255,7 @@ export default {
     // })
   },
   components: {
-    uHeader,
+    uSearch,
     uNav
   }
 };
@@ -250,6 +265,31 @@ export default {
 <style scoped lang="scss">
   @import '../css/common';
   @import '../css/swiper.min';
+
+  .header{
+    width: 100%;
+    height: remf(85);
+    background-color: #00C8BE;
+    color: #fff;
+    box-sizing: border-box;
+    padding: remf(17);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 8;
+
+    .title{
+      float: left;
+      padding-left: remf(48);
+      background: url(../assets/logo.png) 0 0 no-repeat;
+      background-size: remf(45);
+
+      h1{
+        font-size: remf(30);
+        line-height: remf(48);
+      }
+    }
+  }
 
   // -------------banner-----------
   .swiper-container{
