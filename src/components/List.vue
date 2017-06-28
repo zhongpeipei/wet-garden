@@ -2,7 +2,7 @@
   <div class="listBox">
     <div class="header">
       <u-search :seach-style="styles"  @searchButton="search"></u-search>
-      <u-sort></u-sort>
+      <u-sort @tabChange="sort"></u-sort>
     </div>
 
     <ul class="list">
@@ -44,14 +44,25 @@ export default {
       styles: {
         width: '100%'
       },
-      value: '',
       datas: []
     };
   },
   methods: {
     search: function (data) {
-      this.value = data;
-      console.log('value:' + this.value);
+      console.log('value:' + data);
+      // this.$http.get({value: data}, urls.domain + urls.list).then((res) => {
+      //   if(res && res.body.code===0){
+      //     this.datas = res.body.data.list;
+      //   }
+      // })
+    },
+    sort: function (item) {
+      console.log(item.id);
+      // this.$http.get({sort: item.id}, urls.domain + urls.list).then((res) => {
+      //   if(res && res.body.code===0){
+      //     this.datas = res.body.data.list;
+      //   }
+      // })
     }
   },
   created: function () {

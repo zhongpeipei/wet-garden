@@ -13,10 +13,10 @@ export default {
   name: 'uSort',
   data () {
     let datas = [
-      {icon: '-1.5rem -0.75rem', activeI: '-1.5rem 0.07rem', text: '默认', select: false},
-      {icon: '-2.2rem -0.75rem', activeI: '-2.2rem 0.07rem', text: '评分', select: false},
-      {icon: '-3.0rem -0.75rem', activeI: '-3.0rem 0.07rem', text: '人气', select: false},
-      {icon: '-3.7rem -0.75rem', activeI: '-3.7rem 0.07rem', text: '时间', select: false}
+      {id: 1, icon: '-1.5rem -0.75rem', activeI: '-1.5rem 0.07rem', text: '默认', select: false},
+      {id: 2, icon: '-2.2rem -0.75rem', activeI: '-2.2rem 0.07rem', text: '评分', select: false},
+      {id: 3, icon: '-3.0rem -0.75rem', activeI: '-3.0rem 0.07rem', text: '人气', select: false},
+      {id: 4, icon: '-3.7rem -0.75rem', activeI: '-3.7rem 0.07rem', text: '时间', select: false}
     ];
     datas.map((x) => {
       x.default = x.icon;
@@ -37,6 +37,8 @@ export default {
       }
       item.select = true;
       item.default = item.activeI;
+
+      this.$emit('tabChange', item);
     }
   }
 };
