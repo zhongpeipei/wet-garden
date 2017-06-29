@@ -32,7 +32,7 @@ export default {
 @import '../css/common';
 
   .search{
-    margin-top: -0.15rem;
+    margin-top: 0.15rem;
     position: relative;
 
     input{
@@ -48,13 +48,13 @@ export default {
     }
 
     .close{
-      top: remf(16);
+      top: 0.16rem;
       right: remf(38);
     }
 
     .button{
       position: absolute;
-      top: remf(16);
+      top: 0.15rem;;
       right: remf(5);
       content: '';
       width: remf(28);

@@ -1,8 +1,8 @@
 export default {
-  domain: '/rest',
-  detail: '/v1/detail',
-  hot: '/v1/hot',
-  comment: '/v1/comment',
-  downLoad: '/v1/down',
-  list: '/v1/list'
+  domain: 'http://iyuhou.com/rest/v1',
+  detail: '/detail',
+  hot: '/hot',
+  comment: '/comment',
+  downLoad: '/down',
+  list: '/list'
 };

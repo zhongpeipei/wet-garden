@@ -15,8 +15,8 @@ export default {
   name: 'uNav',
   data () {
     let datas = [
-      {router:'/home', icon: '0 -1.05rem', activeI: '0 0', text: '首页', select: false},
-      {router:'/list', icon: '-1.05rem -1.05rem', activeI: '-1.05rem 0', text: '排序', select: false}
+      {router:'/', icon: '0 -1.05rem', activeI: '0 0', text: '首页', select: false},
+      {router:'/list/all', icon: '-1.05rem -1.05rem', activeI: '-1.05rem 0', text: '排序', select: false}
     ];
     datas.map((x) => {
       x.default = x.icon;
@@ -72,7 +72,6 @@ export default {
 
     p {
       font-size: remf(20);
-      margin-top: -0.3rem;
     }
 
     .active {

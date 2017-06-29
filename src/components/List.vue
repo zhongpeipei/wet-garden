@@ -49,29 +49,28 @@ export default {
   },
   methods: {
     search: function (data) {
-      console.log('value:' + data);
-      // this.$http.get({value: data}, urls.domain + urls.list).then((res) => {
-      //   if(res && res.body.code===0){
-      //     this.datas = res.body.data.list;
-      //   }
-      // })
+      this.$http.get(urls.domain + urls.list, {'value': data}).then((res) => {
+        if(res && res.body.code===0){
+          this.datas = res.body.data.list;
+        }
+      })
     },
     sort: function (item) {
-      console.log(item.id);
-      // this.$http.get({sort: item.id}, urls.domain + urls.list).then((res) => {
-      //   if(res && res.body.code===0){
-      //     this.datas = res.body.data.list;
-      //   }
-      // })
+      this.$http.get(urls.domain + urls.list, {'sort': item.id}).then((res) => {
+        if(res && res.body.code===0){
+          this.datas = res.body.data.list;
+        }
+      })
+      console.log('id:' + item.id);
     }
   },
   created: function () {
-    // this.$http.get(urls.domain + urls.list).then((res) => {
-    //   if(res && res.body.code===0){
-    //     this.datas = res.body.data.list;
-    //   }
-    // })
-     console.log('value:' + this.$route.params.value);
+    this.$http.get(urls.domain + urls.list).then((res) => {
+      if(res && res.body.code===0){
+        this.datas = res.body.data.list;
+      }
+    })
+    //  console.log('value:' + this.$route.params.value);
   },
   components: {
     uSearch,

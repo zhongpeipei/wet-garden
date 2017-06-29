@@ -11,16 +11,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'App',
-      component: App
-    },
-    {
-      path: '/home',
       name: 'Home',
       component: Home
     },
     {
-      path: '/list',
+      path: '/list/:value',
       name: 'List',
       component: List
     },
