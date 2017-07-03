@@ -56,12 +56,13 @@ export default {
       })
     },
     sort: function (item) {
+      console.log('id:' + item.id);
+
       this.$http.get(urls.domain + urls.list, {'sort': item.id}).then((res) => {
         if(res && res.body.code===0){
           this.datas = res.body.data.list;
         }
       })
-      console.log('id:' + item.id);
     }
   },
   created: function () {
