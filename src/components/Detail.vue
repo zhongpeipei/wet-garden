@@ -46,7 +46,7 @@
         </ul>
       </div>
 
-      <embed src='http://player.youku.com/player.php/sid/XMjg1MjMxOTg4NA==/v.swf' allowFullScreen='true' quality='high' width='100%' height='300' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
+      <embed src='https://api.47ks.com/webcloud/?v=http://www.le.com/ptv/vplay/30094429.html?ref=100000005' allowFullScreen='true' quality='high' width='100%' height='300' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
 
       <p class="title">热评</p>
     </div>
